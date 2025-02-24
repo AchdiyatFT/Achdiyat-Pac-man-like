@@ -1,0 +1,2 @@
+# AI
+Agate AI Course
