@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -5,6 +7,10 @@ public class Player : MonoBehaviour
     private Rigidbody _rigidBody;
     [SerializeField] float _speed;
     [SerializeField] Transform _camera;
+    [SerializeField] private float _powerupDuration;
+    private Coroutine _powerupCoroutine;
+    public Action OnPowerUpStart;
+    public Action OnPowerUpStop;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Awake()
     {
@@ -27,5 +33,28 @@ public class Player : MonoBehaviour
         horizontalDirection.y = 0;
         Vector3 movementDirection = horizontalDirection + verticalDirection;
         _rigidBody.linearVelocity = movementDirection * _speed * Time.fixedDeltaTime;
+    }
+
+    public void PickPowerUp()
+    {
+        if (_powerupCoroutine != null)
+        {
+            StopCoroutine(_powerupCoroutine);
+        }
+        _powerupCoroutine = StartCoroutine(StartPowerUp());
+    }
+
+    private IEnumerator StartPowerUp()
+    {
+        if (OnPowerUpStart != null)
+        {
+            OnPowerUpStart();
+            Debug.Log("Power Up");
+        }
+        yield return new WaitForSeconds(_powerupDuration);
+        if (OnPowerUpStop != null)
+        {
+            OnPowerUpStop();
+        }
     }
 }
