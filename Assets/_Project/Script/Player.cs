@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
     private Coroutine _powerupCoroutine;
     public Action OnPowerUpStart;
     public Action OnPowerUpStop;
-    private bool _isPowerUpActive;
+    [SerializeField] private bool _isPowerUpActive;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Awake()
     {
@@ -72,18 +72,26 @@ public class Player : MonoBehaviour
     private IEnumerator StartPowerUp()
     {
         _isPowerUpActive = true;
+        Debug.Log("Power Up Started! isPowerUpActive: " + _isPowerUpActive);
+
         if (OnPowerUpStart != null)
         {
             OnPowerUpStart();
-            Debug.Log("Power Up");
+            Debug.Log("OnPowerUpStart invoked!");
         }
+
         yield return new WaitForSeconds(_powerupDuration);
+
         _isPowerUpActive = false;
+        Debug.Log("Power Up Ended! isPowerUpActive: " + _isPowerUpActive);
+
         if (OnPowerUpStop != null)
         {
             OnPowerUpStop();
+            Debug.Log("OnPowerUpStop invoked!");
         }
     }
+
 
     private void OnCollisionEnter(Collision collision)
     {

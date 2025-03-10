@@ -13,7 +13,6 @@ public class Pickable : MonoBehaviour
             if (OnPicked != null)
             {
                 OnPicked(this);
-                DestroyObject(gameObject);
             }
         }
     }

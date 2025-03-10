@@ -6063,7 +6063,7 @@ MonoBehaviour:
   PanAxis:
     Value: 0
     Center: 0
-    Range: {x: -180, y: 180}
+    Range: {x: -135, y: 135}
     Wrap: 0
     Recentering:
       Enabled: 1
@@ -6127,7 +6127,7 @@ MonoBehaviour:
   - {fileID: 1669203122}
   - {fileID: 1541292139}
   - {fileID: 1604922486}
-  ChaseDistance: 50
+  ChaseDistance: 5
   Player: {fileID: 1394673521}
   NavMeshAgent: {fileID: 0}
   Animator: {fileID: 1007520982}
@@ -6216,7 +6216,7 @@ Transform:
   m_GameObject: {fileID: 1007520975}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.08, y: 1.1, z: -1.41}
+  m_LocalPosition: {x: -4.08, y: 1.1, z: -1.09}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6232,7 +6232,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 1
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -7483,6 +7483,7 @@ MonoBehaviour:
   _respawnPoint: {fileID: 814306962}
   _health: 3
   _healthText: {fileID: 1063357260}
+  _isPowerUpActive: 0
 --- !u!114 &1394673522
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13017,7 +13018,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5374369709684177675, guid: f65ebd6d479e68a48a9d5a5c6303328c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.36
+      value: -1.08
       objectReference: {fileID: 0}
     - target: {fileID: 5374369709684177675, guid: f65ebd6d479e68a48a9d5a5c6303328c, type: 3}
       propertyPath: m_LocalPosition.y
@@ -13025,7 +13026,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5374369709684177675, guid: f65ebd6d479e68a48a9d5a5c6303328c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 7.76
+      value: 5.98
       objectReference: {fileID: 0}
     - target: {fileID: 5374369709684177675, guid: f65ebd6d479e68a48a9d5a5c6303328c, type: 3}
       propertyPath: m_LocalRotation.w

@@ -28,7 +28,9 @@ public class Pickablemanager : MonoBehaviour
     private void OnPickablePicked(Pickable pickable)
     {
         _pickableList.Remove(pickable);
-        if (_pickableList.Count <= 0)
+        Debug.Log("Pickable List:" + pickable.PickableType);
+        DestroyObject(pickable.gameObject);
+        if (_pickableList.Count >= 0)
         {
             if (pickable.PickableType == PickableType.PowerUp)
             {

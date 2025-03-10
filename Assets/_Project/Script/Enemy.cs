@@ -54,6 +54,7 @@ public class Enemy : MonoBehaviour
     private void StartRetreating()
     {
         SwitchState(RetreatState);
+        Debug.Log("Kabur");
     }
 
     private void StopRetreating()
