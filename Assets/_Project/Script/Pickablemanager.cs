@@ -6,6 +6,7 @@ public class Pickablemanager : MonoBehaviour
 {
     private List<Pickable> _pickableList = new List<Pickable>();
     [SerializeField] private Player _player;
+    [SerializeField] private ScoreManager _scoreManager;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -20,6 +21,7 @@ public class Pickablemanager : MonoBehaviour
             _pickableList.Add(pickableObjects[i]);
             pickableObjects[i].OnPicked += OnPickablePicked;
         }
+        _scoreManager.SetMaxScore(_pickableList.Count);
         Debug.Log("Pickable List:" + _pickableList);
     }
 
@@ -32,6 +34,10 @@ public class Pickablemanager : MonoBehaviour
             {
                 _player?.PickPowerUp();
             } 
+        }
+        if (_scoreManager != null)
+        {
+            _scoreManager.AddScore(1);
         }
     }
 

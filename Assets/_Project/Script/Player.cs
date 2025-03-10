@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -8,9 +9,13 @@ public class Player : MonoBehaviour
     [SerializeField] float _speed;
     [SerializeField] Transform _camera;
     [SerializeField] private float _powerupDuration;
+    [SerializeField] private Transform _respawnPoint;
+    [SerializeField] private int _health;
+    [SerializeField] private TMP_Text _healthText;
     private Coroutine _powerupCoroutine;
     public Action OnPowerUpStart;
     public Action OnPowerUpStop;
+    private bool _isPowerUpActive;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Awake()
     {
@@ -18,8 +23,28 @@ public class Player : MonoBehaviour
     }
     void Start()
     {
+        UpdateUI();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+    }
+
+    private void UpdateUI()
+    {
+        _healthText.text = "Health: " + _health;
+    }
+
+    public void Dead()
+    {
+        _health -= 1;
+        if (_health > 0)
+        {
+            transform.position = _respawnPoint.position;
+        } else
+        {
+            _health = 0;
+            Debug.Log("Lose");
+        }
+        UpdateUI();
     }
 
     // Update is called once per frame
@@ -46,15 +71,29 @@ public class Player : MonoBehaviour
 
     private IEnumerator StartPowerUp()
     {
+        _isPowerUpActive = true;
         if (OnPowerUpStart != null)
         {
             OnPowerUpStart();
             Debug.Log("Power Up");
         }
         yield return new WaitForSeconds(_powerupDuration);
+        _isPowerUpActive = false;
         if (OnPowerUpStop != null)
         {
             OnPowerUpStop();
         }
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (_isPowerUpActive)
+        {
+            if (collision.gameObject.CompareTag("Enemy"))
+            {
+                collision.gameObject.GetComponent<Enemy>().Dead();
+            }
+        }
+    }
+
 }
